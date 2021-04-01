@@ -1,0 +1,46 @@
+:root {
+  --black: #454545;
+  --white: #fff;
+  --grey: #b2b2b2;
+  --fancy-font: Permanent Marker;
+  --padding: 1.5rem;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  color: var(--black);
+  font-family: Helvetica, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
