@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface TitleProps {
-  text: string;
+  text: string | JSX.Element;
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span";
 }
 
@@ -14,6 +14,20 @@ const Text = styled.span`
   color: var(--black);
   font-family: Permanent Marker;
   text-transform: uppercase;
+
+  & * {
+    color: inherit;
+    font-family: inherit;
+    text-transform: inherit;
+  }
+
+  & a {
+    transition: color 0.3s;
+  }
+
+  & a:hover {
+    color: var(--grey);
+  }
 `;
 
 Text.displayName = "Text";

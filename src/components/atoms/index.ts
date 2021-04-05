@@ -1,4 +1,9 @@
 export { Alignment } from "./Alignment";
+export { Background } from "./Background";
 export { Caption } from "./Caption";
+export { ListItem } from "./ListItem";
+export { Logo } from "./Logo";
 export { Title } from "./Title";
 export { Paper } from "./Paper";
+export { Paragraph } from "./Paragraph";
+export { Rotate } from "./Rotate";

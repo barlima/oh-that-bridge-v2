@@ -30,13 +30,13 @@ const Home: NextPage = () => {
             image={{
               src: "/images/hero.jpg",
               alt: "hero image",
+              caption: {
+                text: "picture by",
+                link: "@lance_asper",
+                href: "https://unsplash.com/@lance_asper",
+              },
             }}
             level={imageLevel}
-            caption={{
-              text: "picture by",
-              link: "@lance_asper",
-              href: "https://unsplash.com/@lance_asper",
-            }}
           />
         </Alignment.Horizontal>
 

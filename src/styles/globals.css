@@ -2,6 +2,7 @@
   --black: #454545;
   --white: #fff;
   --grey: #b2b2b2;
+  --background: #e6ebed;
   --fancy-font: Permanent Marker;
   --padding: 1.5rem;
 }
@@ -10,14 +11,14 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Roboto, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Roboto, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 * {
   color: var(--black);
-  font-family: Helvetica, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Helvetica, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {

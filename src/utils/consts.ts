@@ -1,0 +1,1 @@
+export const IMAGE_RATIO = 9 / 16;

@@ -1,0 +1,1 @@
+export { searchBridges } from "./searchBridges";

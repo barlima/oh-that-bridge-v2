@@ -1,3 +1,12 @@
 {
-  "search": "Are there any bridges you are thinking of?"
+  "search": "Are there any bridges you are thinking of?",
+  "emptySearch": "Sorry, we cannot find anything...",
+  "constructedBy": "Constructed by",
+  "country": "Country",
+  "region": "Region",
+  "height": "Height",
+  "width": "Width",
+  "size": "Size",
+  "length": "Length",
+  "opened": "Opened"
 }
