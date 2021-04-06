@@ -1,8 +1,18 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { SizeEnum } from "../../utils/types";
 
-export const Paper: React.FC = ({ children }) => {
-  return <PaperContainer>{children}</PaperContainer>;
+interface PaperProps {
+  size?: SizeEnum;
+}
+
+export const Paper: React.FC<PaperProps> = ({
+  children,
+  size = SizeEnum.L,
+}) => {
+  const compact = [SizeEnum.S, SizeEnum.M].includes(size);
+
+  return <PaperContainer compact={compact}>{children}</PaperContainer>;
 };
 
 const pseudo = css`
@@ -14,7 +24,7 @@ const pseudo = css`
   z-index: -1;
 `;
 
-const PaperContainer = styled.div`
+const PaperContainer = styled.div<{ compact: boolean }>`
   background-color: var(--white);
   border-width: 0.5px;
   border-style: solid;
@@ -26,7 +36,8 @@ const PaperContainer = styled.div`
     transparent 70%,
     var(--grey) 80%
   );
-  padding: var(--padding);
+  padding: ${(p) =>
+    p.compact ? "calc(var(--padding) / 2)" : "var(--padding)"};
   position: relative;
   width: fit-content;
   min-width: 200px;

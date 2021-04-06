@@ -7,4 +7,5 @@ export interface Bridge {
   image?: Image;
   description?: string;
   metadata: BridgeMetadata;
+  additionalImages: Image[];
 }

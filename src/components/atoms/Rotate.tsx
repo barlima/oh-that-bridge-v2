@@ -16,6 +16,7 @@ export const Rotate: React.FC<RotateProps> = ({ random, deg, children }) => {
 
 const RotateWrapper = styled.div<{ deg: number }>`
   transform: rotate(${(p) => p.deg}deg);
+  transition: transform 0.5s;
 `;
 
 RotateWrapper.displayName = "RotateWrapper";

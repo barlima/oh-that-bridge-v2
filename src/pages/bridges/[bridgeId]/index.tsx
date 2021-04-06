@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-import { Bridge as BridgeType, SizeEnum } from "../../../utils/types";
+import { Bridge as BridgeType, SizeEnum, Image } from "../../../utils/types";
 import {
   Title,
   Alignment,
@@ -19,6 +20,13 @@ import { useOnScreenResize, useScreenResize } from "../../../hooks";
 import { IMAGE_RATIO } from "../../../utils/consts";
 import { metadataIconsMap } from "../../../utils/maps/metadataIconsMap";
 import { bridgeMetadataMap } from "../../../utils/maps/bridgeMetadataMap";
+import {
+  fadeInAndOut,
+  slideLeftBottom,
+  slowStagger,
+  stagger,
+  slideBottom,
+} from "../../../utils/animations";
 
 interface BridgeInitialProps {
   bridge: BridgeType;
@@ -28,16 +36,32 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
   const { size } = useScreenResize();
   const [imageWidth, setImageWidth] = useState(BREAKPOINT_SIZE[SizeEnum.L] / 2);
   const [mainImage, setMainImage] = useState(bridge.image);
+  const [additionalImages, setAdditionalImages] = useState(
+    bridge.additionalImages
+  );
 
   const metadata = bridgeMetadataMap(bridge.metadata);
-  const caption = (
+
+  const getCaption = (image: Image) => (
     <span>
-      {mainImage.caption.text}{" "}
-      <a href={mainImage.caption.link} target="_blank">
-        {mainImage.caption.link}
+      {image.caption.text}{" "}
+      <a href={image.caption.link} target="_blank">
+        {image.caption.link}
       </a>
     </span>
   );
+
+  const updateMainImage = (image: Image): void => {
+    const newAdditionalImagesOrder =
+      image === bridge.image
+        ? bridge.additionalImages
+        : bridge.additionalImages.reduce((acc, img) => {
+            return img === image ? [...acc, bridge.image] : [...acc, img];
+          }, []);
+
+    setMainImage(image);
+    setAdditionalImages(newAdditionalImagesOrder);
+  };
 
   const onScreenResize = (): void => {
     if (typeof window !== "undefined") {
@@ -73,35 +97,58 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
 
       <Logo />
 
-      <Alignment.Center>
-        <Container>
-          <ImageOverflow>
-            <Rotate deg={size === SizeEnum.S ? 0 : -2}>
-              <Card image={bridge.image} width={imageWidth} text={caption} />
-            </Rotate>
-          </ImageOverflow>
-
-          <MainSection>
-            <Title as="h1" text={bridge.name} />
-
-            <BulletList>
-              {Object.entries(metadata).map(([key, value]) => (
-                <IconBullet
-                  key={key}
-                  icon={metadataIconsMap[key]}
-                  text={value}
+      <motion.div initial="initial" animate="animate">
+        <Alignment.Center>
+          <Container>
+            <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
+              <Rotate deg={size === SizeEnum.S ? 0 : -2}>
+                <Card
+                  image={mainImage}
+                  width={imageWidth}
+                  text={getCaption(mainImage)}
                 />
-              ))}
-            </BulletList>
+              </Rotate>
+            </ImageOverflow>
 
-            <OtherImages>other images</OtherImages>
-          </MainSection>
+            <MainSection>
+              <motion.div variants={fadeInAndOut}>
+                <Title as="h1" text={bridge.name} />
+              </motion.div>
 
-          <SecondarySection offset={imageWidth * IMAGE_RATIO}>
-            <Paragraph>{bridge.description}</Paragraph>
-          </SecondarySection>
-        </Container>
-      </Alignment.Center>
+              <BulletList variants={stagger}>
+                {Object.entries(metadata).map(([key, value]) => (
+                  <motion.div variants={slideBottom} key={key}>
+                    <IconBullet icon={metadataIconsMap[key]} text={value} />
+                  </motion.div>
+                ))}
+              </BulletList>
+
+              <OtherImages>
+                {additionalImages.map((img) => (
+                  <OtherImage
+                    key={img.src}
+                    onClick={() => updateMainImage(img)}
+                    variants={fadeInAndOut}
+                  >
+                    <Rotate random>
+                      <Card
+                        image={{ ...img }}
+                        level={SizeEnum.S}
+                        ratio={1}
+                        width={200}
+                      />
+                    </Rotate>
+                  </OtherImage>
+                ))}
+              </OtherImages>
+            </MainSection>
+
+            <SecondarySection offset={imageWidth * IMAGE_RATIO}>
+              <Paragraph>{bridge.description}</Paragraph>
+            </SecondarySection>
+          </Container>
+        </Alignment.Center>
+      </motion.div>
     </Background>
   );
 };
@@ -142,21 +189,45 @@ const Container = styled.div`
 Container.displayName = "Container";
 
 const OtherImages = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
   @media ${breakpoints.M} {
-    height: 50%;
+    height: fit-content;
+    align-items: flex-end;
   }
 `;
 
 OtherImages.displayName = "OtherImages";
 
-const MainSection = styled.div`
+const OtherImage = styled(motion.div)`
+  height: min-content;
+  transition: transform 0.5s;
+  margin-right: var(--padding);
+  margin-top: var(--padding);
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    z-index: 10;
+
+    & > div {
+      transform: rotate(0);
+    }
+  }
+`;
+
+OtherImage.displayName = "OtherImage";
+
+const MainSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
   margin: 2rem;
 
-  & > h1 {
+  & h1 {
     margin: 0;
     text-align: center;
 
@@ -179,7 +250,7 @@ const SecondarySection = styled.div<{ offset: number }>`
 
 SecondarySection.displayName = "SecondarySection";
 
-const ImageOverflow = styled.div`
+const ImageOverflow = styled(motion.div)`
   margin-top: 5vh;
 
   @media ${breakpoints.M} {
@@ -192,7 +263,7 @@ const ImageOverflow = styled.div`
 
 ImageOverflow.displayName = "ImageOverflow";
 
-const BulletList = styled.div`
+const BulletList = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

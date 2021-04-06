@@ -14,6 +14,7 @@ interface CardProps {
   level?: SizeEnum;
   width?: number;
   text?: string | JSX.Element;
+  ratio?: number;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -21,6 +22,7 @@ export const Card: React.FC<CardProps> = ({
   level = SizeEnum.L,
   width,
   text,
+  ratio = IMAGE_RATIO,
 }) => {
   const { size } = useScreenResize();
   const [imageWidth, setImageWidth] = useState(
@@ -36,16 +38,16 @@ export const Card: React.FC<CardProps> = ({
   }, [size, level, width]);
 
   return (
-    <Paper>
+    <Paper size={level}>
       <ImageWrapper>
         <Image
           src={image.src}
           alt={image.alt}
           objectFit="cover"
           width={width || imageWidth}
-          height={(width || imageWidth) * IMAGE_RATIO}
+          height={(width || imageWidth) * ratio}
         />
-        {image.caption && (
+        {image.caption && !text && (
           <Caption>
             {image.caption.text}{" "}
             {image.caption.link && (
@@ -68,6 +70,10 @@ export const Card: React.FC<CardProps> = ({
 
 const ImageWrapper = styled.div`
   position: relative;
+
+  & * {
+    will-change: transform;
+  }
 `;
 
 ImageWrapper.displayName = "ImageWrapper";
