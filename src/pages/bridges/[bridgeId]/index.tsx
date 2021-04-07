@@ -20,10 +20,9 @@ import { useOnScreenResize, useScreenResize } from "../../../hooks";
 import { IMAGE_RATIO } from "../../../utils/consts";
 import { metadataIconsMap } from "../../../utils/maps/metadataIconsMap";
 import { bridgeMetadataMap } from "../../../utils/maps/bridgeMetadataMap";
+import { Motion, FadeInAndOut } from "../../../containers";
 import {
-  fadeInAndOut,
   slideLeftBottom,
-  slowStagger,
   stagger,
   slideBottom,
 } from "../../../utils/animations";
@@ -97,10 +96,13 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
 
       <Logo />
 
-      <motion.div initial="initial" animate="animate">
+      <Motion>
         <Alignment.Center>
           <Container>
-            <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
+            <ImageOverflow
+              variants={slideLeftBottom}
+              key={mainImage.src}
+            >
               <Rotate deg={size === SizeEnum.S ? 0 : -2}>
                 <Card
                   image={mainImage}
@@ -111,9 +113,9 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
             </ImageOverflow>
 
             <MainSection>
-              <motion.div variants={fadeInAndOut}>
+              <FadeInAndOut>
                 <Title as="h1" text={bridge.name} />
-              </motion.div>
+              </FadeInAndOut>
 
               <BulletList variants={stagger}>
                 {Object.entries(metadata).map(([key, value]) => (
@@ -128,7 +130,6 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
                   <OtherImage
                     key={img.src}
                     onClick={() => updateMainImage(img)}
-                    variants={fadeInAndOut}
                   >
                     <Rotate random>
                       <Card
@@ -148,7 +149,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
             </SecondarySection>
           </Container>
         </Alignment.Center>
-      </motion.div>
+      </Motion>
     </Background>
   );
 };
@@ -180,6 +181,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 90vh;
+  overflow-x: hidden;
 
   @media ${breakpoints.M} {
     flex-direction: row;
@@ -191,21 +193,28 @@ Container.displayName = "Container";
 const OtherImages = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  width: 100%;
 
   @media ${breakpoints.M} {
     height: fit-content;
+    min-height: 50%;
     align-items: flex-end;
+    justify-content: flex-start;
   }
 `;
 
 OtherImages.displayName = "OtherImages";
 
-const OtherImage = styled(motion.div)`
+const OtherImage = styled(FadeInAndOut)`
   height: min-content;
   transition: transform 0.5s;
-  margin-right: var(--padding);
+  margin-right: 0;
   margin-top: var(--padding);
+
+  @media ${breakpoints.M} {
+    margin-right: var(--padding);
+  }
 
   &:hover {
     cursor: pointer;
@@ -270,8 +279,12 @@ const BulletList = styled(motion.div)`
   margin: calc(2 * var(--padding)) 0;
 
   & > div {
-    min-width: 40%;
+    width: 100%;
     padding-bottom: var(--padding);
+
+    @media ${breakpoints.M} {
+      width: 40%;
+    }
   }
 `;
 

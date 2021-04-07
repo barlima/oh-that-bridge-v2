@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { breakpoints } from "../../styles/breakpoints";
+import { Fade } from "../../containers";
 
 export const Background: React.FC = ({ children }) => {
   return (
-    <BackgroundContainer
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {children}
-    </BackgroundContainer>
+    <Fade>
+      <BackgroundContainer>{children}</BackgroundContainer>
+    </Fade>
   );
 };
 
-const BackgroundContainer = styled(motion.div)`
+const BackgroundContainer = styled.div`
   background-color: var(--white);
   width: 100vw;
   height: max(100%, 100vh);

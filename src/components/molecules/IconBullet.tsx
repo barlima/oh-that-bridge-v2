@@ -18,8 +18,12 @@ export const IconBullet: React.FC<IconBulletProps> = ({ icon, text }) => {
 }
 
 const IconBulletWrapper = styled.div`
-  display: inline-block;
+  display: flex;
   font-size: 1.25rem;
+
+  & > svg {
+    display: block;
+  }
 `
 
 IconBulletWrapper.displayName = 'IconBulletWrapper'

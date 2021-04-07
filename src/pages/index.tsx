@@ -8,7 +8,7 @@ import { Card } from "../components/molecules";
 import { SizeEnum } from "../utils/types";
 import { Search } from "../components/organism";
 import { useScreenResize } from "../hooks";
-import { motion } from "framer-motion";
+import { Fade } from "../containers";
 
 const Home: NextPage = () => {
   const { size } = useScreenResize();
@@ -17,11 +17,7 @@ const Home: NextPage = () => {
     : SizeEnum.XL;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <Fade>
       <Head>
         <title>Oh, that bridge!</title>
         <link rel="icon" href="/favicon.ico" />
@@ -49,7 +45,7 @@ const Home: NextPage = () => {
           <Search />
         </Alignment.Horizontal>
       </Container>
-    </motion.div>
+    </Fade>
   );
 };
 

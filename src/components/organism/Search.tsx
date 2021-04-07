@@ -91,6 +91,11 @@ export const Search: React.FC = () => {
         placeholder={t("search")}
         onChange={setSearchPhrase}
         onKeyUp={handleClick}
+        onKeyDown={(e) => {
+          if (e.keyCode === 38) {
+            e.preventDefault();
+          }
+        }}
       />
       {searchResults.length > 0 && (
         <DropDown
