@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from "next";
+import { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import styled from "styled-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
