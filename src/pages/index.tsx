@@ -86,7 +86,6 @@ Container.displayName = "Container";
 
 const Note = styled.div`
   bottom: 0;
-  position: fixed;
   width: 90vw;
   margin-top: var(--padding);
 

@@ -99,53 +99,49 @@ export const Search: React.FC = () => {
   }, [attachSearch]);
 
   return (
-    <SearchWrapper
-      onClick={() => size === SizeEnum.S && setAttachSearch(true)}
-      onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
-      attach={attachSearch}
-    >
-      <Input
-        placeholder={size === SizeEnum.S ? t("searchShort") : t("search")}
-        onChange={setSearchPhrase}
-        onKeyDown={handleClick}
-      />
-      {searchResults.length > 0 && (
-        <DropDown
-          items={searchResults.map((res, index) => (
-            <Link href={`/bridges/${res.id}`} key={res.id}>
-              <a>
-                <ListItem
-                  text={res.name}
-                  addition={formatLocation(res.metadata)}
-                  active={activeOption === index}
-                />
-              </a>
-            </Link>
-          ))}
+    <>
+      <Shadow show={size === SizeEnum.S && attachSearch} className="asasdasd" />
+      <SearchWrapper
+        onClick={() => size === SizeEnum.S && setAttachSearch(true)}
+        onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
+        attach={attachSearch}
+      >
+        <Input
+          placeholder={size === SizeEnum.S ? t("searchShort") : t("search")}
+          onChange={setSearchPhrase}
+          onKeyDown={handleClick}
         />
-      )}
+        {searchResults.length > 0 && (
+          <DropDown
+            items={searchResults.map((res, index) => (
+              <Link href={`/bridges/${res.id}`} key={res.id}>
+                <a>
+                  <ListItem
+                    text={res.name}
+                    addition={formatLocation(res.metadata)}
+                    active={activeOption === index}
+                  />
+                </a>
+              </Link>
+            ))}
+          />
+        )}
 
-      {phrase && searchResults.length === 0 && (
-        <DropDown
-          items={loadingRef.current ? [<ListSearching />] : [<ListEmpty />]}
-        />
-      )}
-    </SearchWrapper>
+        {phrase && searchResults.length === 0 && (
+          <DropDown
+            items={loadingRef.current ? [<ListSearching />] : [<ListEmpty />]}
+          />
+        )}
+      </SearchWrapper>
+    </>
   );
 };
 
 const SearchWrapper = styled.div<{ attach: boolean }>`
   margin-top: 1rem;
   width: 90vw;
-  position: fixed;
-  top: 50vh;
-  transition: top 0.5s;
-
-  &:before {
-    opacity: 0;
-    content: "";
-    transition: opacity 0.6s;
-  }
+  transition: transform 0.5s;
+  position: relative;
 
   & > div {
     width: 100%;
@@ -154,25 +150,12 @@ const SearchWrapper = styled.div<{ attach: boolean }>`
   ${(p) => {
     if (p.attach) {
       return `
-        top: var(--padding);
-        left: 5vw;
-
-        &:before {
-          position: fixed;
-          background-color: var(--black);
-          width: 100vw;
-          height: 100vh;
-          left: 0;
-          top: 0;
-          opacity: 0.8;
-          z-index: 0;
-        }
+        transform: translateY(-40vh);
       `;
     }
-  }}
+  }}}
 
   @media ${breakpoints.M} {
-    position: relative;
     top: auto;
     left: auto;
     margin-top: 5vh;
@@ -193,3 +176,16 @@ const SearchWrapper = styled.div<{ attach: boolean }>`
 `;
 
 SearchWrapper.displayName = "SearchWrapper";
+
+const Shadow = styled.div<{ show: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  opacity: ${(p) => (p.show ? 0.8 : 0)};
+  transition: opacity 0.5s;
+`;
+
+Shadow.displayName = "Shadow";
