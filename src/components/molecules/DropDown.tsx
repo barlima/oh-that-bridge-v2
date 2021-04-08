@@ -34,6 +34,8 @@ const DropDownContainer = styled(motion.div)`
   position: absolute;
   width: inherit;
   max-height: 200px;
+  overflow-y: scroll;
+  z-index: 100;
 `;
 
 DropDownContainer.displayName = "DropDownContainer";

@@ -138,7 +138,7 @@ const SearchWrapper = styled.div<{ attach: boolean }>`
   margin-top: 1rem;
   width: 90vw;
   position: fixed;
-  top: 45vh;
+  top: 50vh;
   transition: top 0.5s;
 
   &:before {

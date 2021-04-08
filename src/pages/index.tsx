@@ -48,6 +48,12 @@ const Home: NextPage = () => {
         <Alignment.Horizontal>
           <Search />
         </Alignment.Horizontal>
+
+        <Alignment.Horizontal>
+          <Note>
+            <Title as="h4" text={t("note")} />
+          </Note>
+        </Alignment.Horizontal>
       </Container>
     </Fade>
   );
@@ -77,3 +83,17 @@ const Container = styled.div`
 `;
 
 Container.displayName = "Container";
+
+const Note = styled.div`
+  bottom: 0;
+  position: fixed;
+  width: 90vw;
+  margin-top: var(--padding);
+
+  @media ${breakpoints.M} {
+    width: 50vw;
+    position: relative;
+  }
+`;
+
+Note.displayName = "Note";

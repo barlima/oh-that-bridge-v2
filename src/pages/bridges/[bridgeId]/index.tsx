@@ -272,7 +272,7 @@ const SecondarySection = styled.div<{ offset: number }>`
 SecondarySection.displayName = "SecondarySection";
 
 const ImageOverflow = styled(motion.div)`
-  margin-top: 5vh;
+  margin-top: 7vh;
 
   @media ${breakpoints.M} {
     margin-top: 0;

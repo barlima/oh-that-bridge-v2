@@ -10,5 +10,7 @@
   "width": "Width",
   "size": "Size",
   "length": "Length",
-  "opened": "Opened"
+  "opened": "Opened",
+  "note": "Has it ever happened to you that while watching a movie you spotted a bridge in the background and started wondering where that place is?\nThis site is here to help!",
+  "bridgeDescription": "Opened in {{ year }}, {{ name }} is located in {{ city }} ({{ country }})."
 }
