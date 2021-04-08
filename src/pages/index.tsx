@@ -1,5 +1,6 @@
 import { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
+import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -11,6 +12,7 @@ import { useScreenResize } from "../hooks";
 import { Fade } from "../containers";
 
 const Home: NextPage = () => {
+  const { t } = useTranslation();
   const { size } = useScreenResize();
   const imageLevel = [SizeEnum.L, SizeEnum.XL].includes(size)
     ? SizeEnum.L
@@ -20,6 +22,7 @@ const Home: NextPage = () => {
     <Fade>
       <Head>
         <title>Oh, that bridge!</title>
+        <meta name="description" content={t("search")} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

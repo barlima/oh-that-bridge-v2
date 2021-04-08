@@ -91,6 +91,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
     <Background>
       <Head>
         <title>{`${bridge.name} | Oh, that bridge!`}</title>
+        <meta name="description" content={bridge.name} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -99,10 +100,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
       <Motion>
         <Alignment.Center>
           <Container>
-            <ImageOverflow
-              variants={slideLeftBottom}
-              key={mainImage.src}
-            >
+            <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
               <Rotate deg={size === SizeEnum.S ? 0 : -2}>
                 <Card
                   image={mainImage}
