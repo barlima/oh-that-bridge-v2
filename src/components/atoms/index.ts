@@ -1,4 +1,5 @@
 export { Alignment } from "./Alignment";
+export { BackArrow } from "./BackArrow";
 export { Background } from "./Background";
 export { Caption } from "./Caption";
 export { ListItem } from "./ListItem";

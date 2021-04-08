@@ -12,9 +12,11 @@ export const bridgeMetadataMap = (
     opened: [opened.day, opened.month, opened.year].join("."),
     constructedBy: metadata.constructedBy,
     length: `${metadata.length}m`,
-    size: [metadata.width, metadata.height]
-      .filter(Boolean)
-      .map((item) => `${item}m`)
-      .join(" x "),
+    width: metadata.width ? `${metadata.width}m` : "",
+    height: metadata.height ? `${metadata.height}m` : "",
+    // size: [metadata.width, metadata.height]
+    //   .filter(Boolean)
+    //   .map((item) => `${item}m`)
+    //   .join(" x "),
   };
 };

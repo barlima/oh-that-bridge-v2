@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { breakpoints } from "../../styles/breakpoints";
 
 interface TitleProps {
   text: string | JSX.Element;
@@ -14,6 +15,7 @@ const Text = styled.span`
   color: var(--black);
   font-family: Permanent Marker;
   text-transform: uppercase;
+  transform: scale(0.75);
 
   & * {
     color: inherit;
@@ -27,6 +29,10 @@ const Text = styled.span`
 
   & a:hover {
     color: var(--grey);
+  }
+
+  @media ${breakpoints.M} {
+    transform: scale(1);
   }
 `;
 

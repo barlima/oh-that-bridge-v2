@@ -1,6 +1,8 @@
 {
   "search": "Are there any bridges you are thinking of?",
+  "searchShort": "Looking for something?",
   "emptySearch": "Sorry, we cannot find anything...",
+  "searching": "Almost there...",
   "constructedBy": "Constructed by",
   "country": "Country",
   "region": "Region",

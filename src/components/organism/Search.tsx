@@ -9,18 +9,21 @@ import isNumber from "lodash/isNumber";
 
 import { Input } from "../molecules/Input";
 import { BREAKPOINT_SIZE, breakpoints } from "../../styles/breakpoints";
-import { Bridge } from "../../utils/types";
-import { DropDown, ListEmpty } from "../molecules";
+import { Bridge, SizeEnum } from "../../utils/types";
+import { DropDown, ListEmpty, ListSearching } from "../molecules";
 import { ListItem } from "../atoms";
 import { formatLocation } from "../../utils/formatters";
+import { useScreenResize } from "../../hooks";
 
 export const Search: React.FC = () => {
   const { t } = useTranslation();
+  const { size } = useScreenResize();
   const router = useRouter();
   const loadingRef = useRef(false);
   const [phrase, setPhrase] = useState("");
   const [activeOption, setActiveOption] = useState<number>();
   const [searchResults, setSearchResults] = useState<Bridge[]>([]);
+  const [attachSearch, setAttachSearch] = useState(false);
 
   const setSearchPhrase = debounce(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -34,6 +37,7 @@ export const Search: React.FC = () => {
   const hideDropDown = (): void => {
     setSearchResults([]);
     setPhrase("");
+    setAttachSearch(false);
   };
 
   const handleSearch = async (phrase: string): Promise<void> => {
@@ -53,11 +57,11 @@ export const Search: React.FC = () => {
 
   const handleClick = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>): void => {
-      event.preventDefault();
       const code = event.keyCode;
 
       switch (code) {
         case 38:
+          event.preventDefault();
           setActiveOption((current) =>
             current ? current - 1 : searchResults.length - 1
           );
@@ -85,17 +89,25 @@ export const Search: React.FC = () => {
     loadingRef.current = false;
   }, [phrase]);
 
+  useEffect(() => {
+    if (!attachSearch) {
+      setTimeout(() => {
+        setSearchResults([]);
+        setPhrase("");
+      }, 0);
+    }
+  }, [attachSearch]);
+
   return (
-    <SearchWrapper>
+    <SearchWrapper
+      onClick={() => size === SizeEnum.S && setAttachSearch(true)}
+      onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
+      attach={attachSearch}
+    >
       <Input
-        placeholder={t("search")}
+        placeholder={size === SizeEnum.S ? t("searchShort") : t("search")}
         onChange={setSearchPhrase}
-        onKeyUp={handleClick}
-        onKeyDown={(e) => {
-          if (e.keyCode === 38) {
-            e.preventDefault();
-          }
-        }}
+        onKeyDown={handleClick}
       />
       {searchResults.length > 0 && (
         <DropDown
@@ -113,24 +125,62 @@ export const Search: React.FC = () => {
         />
       )}
 
-      {phrase && searchResults.length === 0 && !loadingRef.current && (
-        <DropDown items={[<ListEmpty />]} />
+      {phrase && searchResults.length === 0 && (
+        <DropDown
+          items={loadingRef.current ? [<ListSearching />] : [<ListEmpty />]}
+        />
       )}
     </SearchWrapper>
   );
 };
 
-const SearchWrapper = styled.div`
-  margin-top: 5vh;
+const SearchWrapper = styled.div<{ attach: boolean }>`
+  margin-top: 1rem;
   width: 90vw;
-  position: relative;
+  position: fixed;
+  top: 45vh;
+  transition: top 0.5s;
+
+  &:before {
+    opacity: 0;
+    content: "";
+    transition: opacity 0.6s;
+  }
 
   & > div {
     width: 100%;
   }
 
+  ${(p) => {
+    if (p.attach) {
+      return `
+        top: var(--padding);
+        left: 5vw;
+
+        &:before {
+          position: fixed;
+          background-color: var(--black);
+          width: 100vw;
+          height: 100vh;
+          left: 0;
+          top: 0;
+          opacity: 0.8;
+          z-index: 0;
+        }
+      `;
+    }
+  }}
+
   @media ${breakpoints.M} {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 5vh;
     width: ${BREAKPOINT_SIZE.M * 0.8}px;
+
+    &:before {
+      display: none;
+    }
   }
 
   @media ${breakpoints.L} {

@@ -10,6 +10,7 @@ import { SizeEnum } from "../utils/types";
 import { Search } from "../components/organism";
 import { useScreenResize } from "../hooks";
 import { Fade } from "../containers";
+import { breakpoints } from "../styles/breakpoints";
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -64,6 +65,15 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
 const Container = styled.div`
   text-align: center;
+  position: relative;
+
+  & > h1 {
+    font-size: 2rem;
+
+    @media ${breakpoints.M} {
+      font-size: 3rem;
+    }
+  }
 `;
 
 Container.displayName = "Container";

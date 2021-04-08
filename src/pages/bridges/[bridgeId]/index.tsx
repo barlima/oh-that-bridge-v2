@@ -13,11 +13,12 @@ import {
   Rotate,
   Background,
   Logo,
+  BackArrow,
 } from "../../../components/atoms";
 import { Card, IconBullet } from "../../../components/molecules";
 import { BREAKPOINT_SIZE, breakpoints } from "../../../styles/breakpoints";
 import { useOnScreenResize, useScreenResize } from "../../../hooks";
-import { IMAGE_RATIO } from "../../../utils/consts";
+import { IMAGE_RATIO, ADDITIONAL_IMAGE_WIDTH } from "../../../utils/consts";
 import { metadataIconsMap } from "../../../utils/maps/metadataIconsMap";
 import { bridgeMetadataMap } from "../../../utils/maps/bridgeMetadataMap";
 import { Motion, FadeInAndOut } from "../../../containers";
@@ -38,13 +39,16 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
   const [additionalImages, setAdditionalImages] = useState(
     bridge.additionalImages
   );
+  const [additionalImageWidth, setAdditionalImageWidth] = useState(
+    ADDITIONAL_IMAGE_WIDTH
+  );
 
   const metadata = bridgeMetadataMap(bridge.metadata);
 
   const getCaption = (image: Image) => (
     <span>
       {image.caption.text}{" "}
-      <a href={image.caption.link} target="_blank">
+      <a href={image.caption.href} target="_blank">
         {image.caption.link}
       </a>
     </span>
@@ -68,8 +72,10 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
       const screenWidthHalf = window.innerWidth / 2;
 
       if (window.innerWidth < BREAKPOINT_SIZE.M) {
+        setAdditionalImageWidth(1.5 * ADDITIONAL_IMAGE_WIDTH);
         return;
       }
+      setAdditionalImageWidth(ADDITIONAL_IMAGE_WIDTH);
 
       if (screenWidthHalf * IMAGE_RATIO > screenHeightHalf) {
         setImageWidth(screenHeightHalf / IMAGE_RATIO);
@@ -95,9 +101,10 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Logo />
-
       <Motion>
+        <Logo />
+        <BackArrow href="/" />
+        
         <Alignment.Center>
           <Container>
             <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
@@ -116,25 +123,32 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
               </FadeInAndOut>
 
               <BulletList variants={stagger}>
-                {Object.entries(metadata).map(([key, value]) => (
-                  <motion.div variants={slideBottom} key={key}>
-                    <IconBullet icon={metadataIconsMap[key]} text={value} />
-                  </motion.div>
-                ))}
+                {Object.entries(metadata).map(
+                  ([key, value]) =>
+                    value && (
+                      <motion.div variants={slideBottom} key={key}>
+                        <IconBullet
+                          icon={metadataIconsMap[key]}
+                          text={value}
+                          rotate={key === "width" ? 90 : 0}
+                        />
+                      </motion.div>
+                    )
+                )}
               </BulletList>
 
               <OtherImages>
                 {additionalImages.map((img) => (
                   <OtherImage
                     key={img.src}
-                    onClick={() => updateMainImage(img)}
+                    onClick={() => size !== SizeEnum.S && updateMainImage(img)}
                   >
                     <Rotate random>
                       <Card
                         image={{ ...img }}
                         level={SizeEnum.S}
                         ratio={1}
-                        width={200}
+                        width={additionalImageWidth}
                       />
                     </Rotate>
                   </OtherImage>

@@ -16,7 +16,8 @@ export const Logo: React.FC = () => {
 
 const LogoWrapper = styled.a`
   background-color: var(--black);
-  height: 5vh;
+  height: 7vh;
+  line-height: 7vh;
   display: flex;
   justify-content: center;
   position: absolute;
@@ -28,6 +29,7 @@ const LogoWrapper = styled.a`
   @media ${breakpoints.M} {
     background-color: transparent;
     bottom: 0;
+    height: 5vh;
     top: auto;
     top: none;
     line-height: 5vh;
@@ -45,7 +47,6 @@ const LogoWrapper = styled.a`
 
     @media ${breakpoints.M} {
       color: var(--grey);
-      transform: scale(1);
     }
   }
 `;
