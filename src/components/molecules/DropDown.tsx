@@ -41,7 +41,7 @@ const DropDownContainer = styled(motion.div)`
 DropDownContainer.displayName = "DropDownContainer";
 
 const DropDownElement = styled.div`
-  background: var(--white);
+  background-color: var(--white);
   text-align: left;
   width: 100%;
 `;

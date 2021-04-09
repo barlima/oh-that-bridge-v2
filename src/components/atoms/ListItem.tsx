@@ -50,7 +50,6 @@ const ListItemContainer = styled.div<{ active: boolean; disabled: boolean }>`
 ListItemContainer.displayName = "ListItemContainer";
 
 const Text = styled.span`
-  background-color: var(--white);
   font-family: var(--fancy-font);
   display: block;
 
