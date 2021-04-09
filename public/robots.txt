@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ohthatbridge.com
+
+# Sitemaps
+Sitemap: https://ohthatbridge.com/sitemap.xml
+Sitemap: https://ohthatbridge.com/bridges-sitemap.xml
