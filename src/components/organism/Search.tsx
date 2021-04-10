@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import getConfig from "next/config";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import debounce from "lodash/debounce";
@@ -19,11 +18,13 @@ export const Search: React.FC = () => {
   const { t } = useTranslation();
   const { size } = useScreenResize();
   const router = useRouter();
+  const searchRef = useRef<HTMLDivElement>();
   const loadingRef = useRef(false);
   const [phrase, setPhrase] = useState("");
   const [activeOption, setActiveOption] = useState<number>();
   const [searchResults, setSearchResults] = useState<Bridge[]>([]);
   const [attachSearch, setAttachSearch] = useState(false);
+  const [searchOffset, setSearchOffset] = useState(0);
 
   const setSearchPhrase = debounce(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -90,6 +91,11 @@ export const Search: React.FC = () => {
   }, [phrase]);
 
   useEffect(() => {
+    if (searchRef.current) {
+      const searchRect = searchRef.current.getBoundingClientRect();
+      setSearchOffset(searchRect.top);
+    }
+
     if (!attachSearch) {
       setTimeout(() => {
         setSearchResults([]);
@@ -102,9 +108,11 @@ export const Search: React.FC = () => {
     <>
       <Shadow show={size === SizeEnum.S && attachSearch} className="asasdasd" />
       <SearchWrapper
+        ref={searchRef}
         onClick={() => size === SizeEnum.S && setAttachSearch(true)}
         onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
         attach={attachSearch}
+        offset={searchOffset}
       >
         <Input
           placeholder={size === SizeEnum.S ? t("searchShort") : t("search")}
@@ -137,7 +145,7 @@ export const Search: React.FC = () => {
   );
 };
 
-const SearchWrapper = styled.div<{ attach: boolean }>`
+const SearchWrapper = styled.div<{ attach: boolean; offset: number }>`
   margin-top: 1rem;
   width: 90vw;
   transition: transform 0.5s;
@@ -150,7 +158,7 @@ const SearchWrapper = styled.div<{ attach: boolean }>`
   ${(p) => {
     if (p.attach) {
       return `
-        transform: translateY(-40vh);
+        transform: translateY(calc(var(--padding) - ${p.offset}px));
       `;
     }
   }}}
