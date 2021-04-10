@@ -1,1 +1,2 @@
-export { formatLocation } from './locationFormatter';
+export { formatDate } from "./dateFormatter";
+export { formatLocation } from "./locationFormatter";

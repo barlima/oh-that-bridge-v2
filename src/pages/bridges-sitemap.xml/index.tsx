@@ -8,6 +8,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const fields = data.bridges.map((bridge: Bridge) => ({
     loc: `https://ohthatbridge.com/bridge/${bridge.id}`,
+    lastmod: new Date().toISOString(),
   }));
 
   return getServerSideSitemap(ctx, fields);

@@ -7,4 +7,5 @@ export { Logo } from "./Logo";
 export { Title } from "./Title";
 export { Paper } from "./Paper";
 export { Paragraph } from "./Paragraph";
+export { ProgressBar } from "./ProgressBar";
 export { Rotate } from "./Rotate";

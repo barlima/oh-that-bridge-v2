@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { appWithTranslation } from "next-i18next";
+import { ProgressBar } from "../components/atoms";
 
 import "../styles/globals.css";
 
@@ -14,6 +15,8 @@ function App({ Component, pageProps }: AppProps) {
           content="Search for bridges all around the world!"
         />
       </Head>
+
+      <ProgressBar />
       <Component {...pageProps} />
     </>
   );

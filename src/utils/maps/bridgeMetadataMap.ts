@@ -1,4 +1,5 @@
 import { BridgeMetadata } from "../types";
+import { formatDate } from "../formatters";
 
 export const bridgeMetadataMap = (
   metadata: BridgeMetadata
@@ -9,7 +10,7 @@ export const bridgeMetadataMap = (
     country: metadata.country,
     region: metadata.region,
     city: metadata.city,
-    opened: [opened.day, opened.month, opened.year].join("."),
+    opened: formatDate(opened.day, opened.month, opened.year),
     constructedBy: metadata.constructedBy,
     length: `${metadata.length}m`,
     width: metadata.width ? `${metadata.width}m` : "",
