@@ -25,9 +25,9 @@ export const BackArrow: React.FC<BackArrowProps> = ({ href }) => {
 
 const ArrowWrapper = styled(motion.div)`
   display: none;
-  position: fixed;
-  left: 5vh;
-  top: 0;
+  width: min-content;
+  margin-top: -5vh;
+  height: 5vh;
 
   & h2 {
     color: var(--grey);

@@ -74,6 +74,22 @@ const ImageWrapper = styled.div`
   & * {
     will-change: transform;
   }
+
+  & > div::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(
+      150deg,
+      black 10%,
+      var(--black) 48%,
+      var(--black) 52%,
+      black 90%
+    );
+  }
 `;
 
 ImageWrapper.displayName = "ImageWrapper";

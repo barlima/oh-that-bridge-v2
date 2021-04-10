@@ -75,7 +75,9 @@ export const Search: React.FC = () => {
           );
           break;
         case 13:
-          router.push(`/bridges/${searchResults[activeOption].id}`);
+          if (searchResults[activeOption]) {
+            router.push(`/bridges/${searchResults[activeOption].id}`);
+          }
           break;
         case 27:
           hideDropDown();
@@ -194,6 +196,7 @@ const Shadow = styled.div<{ show: boolean }>`
   background-color: var(--black);
   opacity: ${(p) => (p.show ? 0.8 : 0)};
   transition: opacity 0.5s;
+  z-index: ${(p) => (p.show ? 0 : -1)};
 `;
 
 Shadow.displayName = "Shadow";

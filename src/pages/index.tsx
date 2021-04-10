@@ -33,7 +33,8 @@ const Home: NextPage = () => {
         <Alignment.Horizontal>
           <Card
             image={{
-              src: "/images/hero.jpg",
+              src:
+                "https://images.unsplash.com/photo-1477288309209-a14ce05a641e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2689&q=80",
               alt: "hero image",
               caption: {
                 text: "picture by",
