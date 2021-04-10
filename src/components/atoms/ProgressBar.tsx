@@ -6,6 +6,6 @@ export const ProgressBar: React.FC = () => (
     color="#b2b2b2"
     startPosition={0.3}
     stopDelayMs={200}
-    height={2}
+    height={3}
   />
 );

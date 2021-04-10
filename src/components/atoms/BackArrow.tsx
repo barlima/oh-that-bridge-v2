@@ -32,6 +32,7 @@ const ArrowWrapper = styled(motion.div)`
   & h2 {
     color: var(--grey);
     margin: 0;
+    line-height: 4vh;
     transition: color 0.3s;
 
     &:hover {
