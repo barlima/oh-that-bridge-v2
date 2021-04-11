@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 
 import { Paper, Caption, Title } from "../atoms";
-import { useScreenResize } from "../../hooks";
 import { SizeEnum, Image as ImageType } from "../../utils/types";
-import { BREAKPOINT_SIZE } from "../../styles/breakpoints";
-import { ImageSizeMap } from "../../utils/maps/imageSizeMap";
-import { IMAGE_RATIO } from "../../utils/consts";
+import { IMAGE_RATIO, DEFAULT_IMAGE_WIDTH } from "../../utils/consts";
+import { breakpoints } from "../../styles/breakpoints";
 
 interface CardProps {
   image: ImageType;
@@ -24,28 +22,17 @@ export const Card: React.FC<CardProps> = ({
   text,
   ratio = IMAGE_RATIO,
 }) => {
-  const { size } = useScreenResize();
-  const [imageWidth, setImageWidth] = useState(
-    BREAKPOINT_SIZE[size] * ImageSizeMap[level]
-  );
-
-  useEffect(() => {
-    if (width) {
-      return;
-    }
-
-    setImageWidth(BREAKPOINT_SIZE[size] * ImageSizeMap[level]);
-  }, [size, level, width]);
-
   return (
     <Paper size={level}>
       <ImageWrapper>
         <Image
           src={image.src}
           alt={image.alt}
+          layout="intrinsic"
           objectFit="cover"
-          width={width || imageWidth}
-          height={(width || imageWidth) * ratio}
+          priority
+          width={width || DEFAULT_IMAGE_WIDTH}
+          height={(width || DEFAULT_IMAGE_WIDTH) * ratio}
         />
         {image.caption && !text && (
           <Caption>
@@ -70,6 +57,7 @@ export const Card: React.FC<CardProps> = ({
 
 const ImageWrapper = styled.div`
   position: relative;
+  width: calc(100vw - 2 * var(--padding));
 
   & * {
     will-change: transform;
@@ -89,6 +77,18 @@ const ImageWrapper = styled.div`
       var(--black) 52%,
       black 90%
     );
+  }
+
+  @media ${breakpoints.M} {
+    width: 60vw;
+  }
+
+  @media ${breakpoints.L} {
+    width: 50vw;
+  }
+
+  @media ${breakpoints.XL} {
+    width: 40vw;
   }
 `;
 

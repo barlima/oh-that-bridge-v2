@@ -15,10 +15,10 @@ import {
   Logo,
   BackArrow,
 } from "../../../components/atoms";
-import { Card, IconBullet } from "../../../components/molecules";
+import { Card, IconBullet, ImagePreview } from "../../../components/molecules";
 import { BREAKPOINT_SIZE, breakpoints } from "../../../styles/breakpoints";
 import { useOnScreenResize, useScreenResize } from "../../../hooks";
-import { IMAGE_RATIO, ADDITIONAL_IMAGE_WIDTH } from "../../../utils/consts";
+import { IMAGE_RATIO } from "../../../utils/consts";
 import { metadataIconsMap } from "../../../utils/maps/metadataIconsMap";
 import { bridgeMetadataMap } from "../../../utils/maps/bridgeMetadataMap";
 import { Motion, FadeInAndOut } from "../../../containers";
@@ -38,9 +38,6 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
   const [mainImage, setMainImage] = useState(bridge.image);
   const [additionalImages, setAdditionalImages] = useState(
     bridge.additionalImages
-  );
-  const [additionalImageWidth, setAdditionalImageWidth] = useState(
-    ADDITIONAL_IMAGE_WIDTH
   );
 
   const metadata = bridgeMetadataMap(bridge.metadata);
@@ -72,10 +69,8 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
       const screenWidthHalf = window.innerWidth / 2;
 
       if (window.innerWidth < BREAKPOINT_SIZE.M) {
-        setAdditionalImageWidth(1.5 * ADDITIONAL_IMAGE_WIDTH);
         return;
       }
-      setAdditionalImageWidth(ADDITIONAL_IMAGE_WIDTH);
 
       if (screenWidthHalf * IMAGE_RATIO > screenHeightHalf) {
         setImageWidth(screenHeightHalf / IMAGE_RATIO);
@@ -104,7 +99,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
       <Motion>
         <Logo />
         <BackArrow href="/" />
-        
+
         <Alignment.Center>
           <Container>
             <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
@@ -144,12 +139,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
                     onClick={() => size !== SizeEnum.S && updateMainImage(img)}
                   >
                     <Rotate random>
-                      <Card
-                        image={{ ...img }}
-                        level={SizeEnum.S}
-                        ratio={1}
-                        width={additionalImageWidth}
-                      />
+                      <ImagePreview image={img} />
                     </Rotate>
                   </OtherImage>
                 ))}

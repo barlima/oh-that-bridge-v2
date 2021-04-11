@@ -1,5 +1,6 @@
 import { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
+import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -9,8 +10,9 @@ import { Card } from "../components/molecules";
 import { SizeEnum } from "../utils/types";
 import { Search } from "../components/organism";
 import { useScreenResize } from "../hooks";
-import { Fade, FadeInAndOut } from "../containers";
+import { Fade, FadeInAndOut, Motion } from "../containers";
 import { breakpoints } from "../styles/breakpoints";
+import { slideBottom } from "../utils/animations";
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -27,37 +29,43 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Container>
-        <Title as="h1" text="Oh, that bridge!" />
+      <Motion>
+        <Container>
+          <motion.div variants={slideBottom}>
+            <Title as="h1" text="Oh, that bridge!" />
+          </motion.div>
 
-        <Alignment.Horizontal>
-          <FadeInAndOut>
-            <Card
-              image={{
-                src:
-                  "https://images.unsplash.com/photo-1477288309209-a14ce05a641e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-                alt: "hero image",
-                caption: {
-                  text: "picture by",
-                  link: "@lance_asper",
-                  href: "https://unsplash.com/@lance_asper",
-                },
-              }}
-              level={imageLevel}
-            />
-          </FadeInAndOut>
-        </Alignment.Horizontal>
+          <Alignment.Horizontal>
+            <FadeInAndOut>
+              <Card
+                image={{
+                  src:
+                    "https://images.unsplash.com/photo-1477288309209-a14ce05a641e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+                  alt: "hero image",
+                  caption: {
+                    text: "picture by",
+                    link: "@lance_asper",
+                    href: "https://unsplash.com/@lance_asper",
+                  },
+                }}
+                level={imageLevel}
+              />
+            </FadeInAndOut>
+          </Alignment.Horizontal>
 
-        <Alignment.Horizontal>
-          <Search />
-        </Alignment.Horizontal>
+          <Alignment.Horizontal>
+            <Search />
+          </Alignment.Horizontal>
 
-        <Alignment.Horizontal>
-          <Note>
-            <Title as="h4" text={t("note")} />
-          </Note>
-        </Alignment.Horizontal>
-      </Container>
+          <Alignment.Horizontal>
+            <FadeInAndOut>
+              <Note>
+                <Title as="h4" text={t("note")} />
+              </Note>
+            </FadeInAndOut>
+          </Alignment.Horizontal>
+        </Container>
+      </Motion>
     </Fade>
   );
 };
