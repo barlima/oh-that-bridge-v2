@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from "next";
+import { NextPage, GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import { Formik, Field } from "formik";
@@ -118,9 +118,7 @@ const Add: NextPage = () => {
 
               <Title as="h4" text="Additional images" />
 
-              <Alignment.Horizontal>
-                {new Array(3).fill(0).map((_, i) => getImageFields(i + 1))}
-              </Alignment.Horizontal>
+              {new Array(3).fill(0).map((_, i) => getImageFields(i + 1))}
 
               <button type="submit">Submit</button>
             </Form>
@@ -133,7 +131,7 @@ const Add: NextPage = () => {
 
 export default Add;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // if (process.env.NODE_ENV !== "development") {
   //   return {
   //     props: {},
