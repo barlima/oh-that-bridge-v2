@@ -9,7 +9,7 @@ import { Card } from "../components/molecules";
 import { SizeEnum } from "../utils/types";
 import { Search } from "../components/organism";
 import { useScreenResize } from "../hooks";
-import { Fade } from "../containers";
+import { Fade, FadeInAndOut } from "../containers";
 import { breakpoints } from "../styles/breakpoints";
 
 const Home: NextPage = () => {
@@ -31,19 +31,21 @@ const Home: NextPage = () => {
         <Title as="h1" text="Oh, that bridge!" />
 
         <Alignment.Horizontal>
-          <Card
-            image={{
-              src:
-                "https://images.unsplash.com/photo-1477288309209-a14ce05a641e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2689&q=80",
-              alt: "hero image",
-              caption: {
-                text: "picture by",
-                link: "@lance_asper",
-                href: "https://unsplash.com/@lance_asper",
-              },
-            }}
-            level={imageLevel}
-          />
+          <FadeInAndOut>
+            <Card
+              image={{
+                src:
+                  "https://images.unsplash.com/photo-1477288309209-a14ce05a641e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+                alt: "hero image",
+                caption: {
+                  text: "picture by",
+                  link: "@lance_asper",
+                  href: "https://unsplash.com/@lance_asper",
+                },
+              }}
+              level={imageLevel}
+            />
+          </FadeInAndOut>
         </Alignment.Horizontal>
 
         <Alignment.Horizontal>
