@@ -134,14 +134,14 @@ const Add: NextPage = () => {
 export default Add;
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  if (process.env.NODE_ENV !== "development") {
-    return {
-      props: {},
-      redirect: {
-        destination: "/",
-      },
-    };
-  }
+  // if (process.env.NODE_ENV !== "development") {
+  //   return {
+  //     props: {},
+  //     redirect: {
+  //       destination: "/",
+  //     },
+  //   };
+  // }
 
   return {
     props: {
