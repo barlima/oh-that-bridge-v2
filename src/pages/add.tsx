@@ -13,7 +13,7 @@ const FormInput = ({ field, form, ...props }) => (
 );
 
 const getImageFields = (index?: number): JSX.Element => (
-  <div key={`image_fields_${index}`}>
+  <div key={`image_fields_${index}`} className="images">
     <Field
       name={`src${index || ""}`}
       placeholder="Source"
@@ -151,7 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 const Form = styled.form`
   width: 40vw;
 
-  & > * {
+  & > *, & .images > * {
     margin-bottom: var(--padding);
     width: 100%;
   }
