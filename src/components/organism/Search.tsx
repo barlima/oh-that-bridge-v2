@@ -111,7 +111,13 @@ export const Search: React.FC = () => {
       <Shadow show={size === SizeEnum.S && attachSearch} className="asasdasd" />
       <SearchWrapper
         ref={searchRef}
-        onClick={() => size === SizeEnum.S && setAttachSearch(true)}
+        onClick={() => {
+          window.scroll({ top: 0, left: 0 });
+
+          if (size === SizeEnum.S) {
+            setAttachSearch(true);
+          }
+        }}
         onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
         attach={attachSearch}
         offset={searchOffset}

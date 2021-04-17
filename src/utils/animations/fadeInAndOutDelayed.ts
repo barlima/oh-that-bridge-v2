@@ -7,7 +7,7 @@ export const fadeInAndOutDelayed: Variants = {
   animate: {
     opacity: 1,
     transition: {
-      delay: 1,
+      delay: 0.6,
     },
   },
 };

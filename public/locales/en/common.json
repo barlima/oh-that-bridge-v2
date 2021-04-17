@@ -21,5 +21,8 @@
     "asia": "Asia",
     "africa": "Africa",
     "australia": "Australia & Oceania"
-  }
+  },
+  "bridgesOf": "Bridges of {{ country }}",
+  "noBridges": "Sorry, but there are no bridges added to this country yet...",
+  "goBack": "Go back"
 }

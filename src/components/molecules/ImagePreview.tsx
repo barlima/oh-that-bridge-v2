@@ -2,16 +2,17 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 
-import { Paper, Caption } from "../atoms";
+import { Paper, Caption, Title } from "../atoms";
 import { SizeEnum, Image as ImageType } from "../../utils/types";
 import { ADDITIONAL_IMAGE_WIDTH } from "../../utils/consts";
 import { breakpoints } from "../../styles/breakpoints";
 
 interface ImagePreviewProps {
   image: ImageType;
+  text?: string;
 }
 
-export const ImagePreview: React.FC<ImagePreviewProps> = ({ image }) => {
+export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
   return (
     <Paper size={SizeEnum.S}>
       <ImageWrapper>
@@ -35,6 +36,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image }) => {
           </Caption>
         )}
       </ImageWrapper>
+      {text && <Title text={text} />}
     </Paper>
   );
 };
