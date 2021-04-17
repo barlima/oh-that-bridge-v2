@@ -1,6 +1,7 @@
 {
   "search": "Are there any bridges you are thinking of?",
   "searchShort": "Looking for something?",
+  "searchByCountry": "Search by country",
   "emptySearch": "Sorry, we cannot find anything...",
   "searching": "Almost there...",
   "constructedBy": "Constructed by",
@@ -12,5 +13,13 @@
   "length": "Length",
   "opened": "Opened",
   "note": "Has it ever happened to you that while watching a movie you spotted a bridge in the background and started wondering where that place is?\nThis site is here to help!",
-  "bridgeDescription": "Opened in {{ year }}, {{ name }} is located in {{ city }} ({{ country }})."
+  "bridgeDescription": "Opened in {{ year }}, {{ name }} is located in {{ city }} ({{ country }}).",
+  "continents": {
+    "europe": "Europe",
+    "northAmerica": "North America",
+    "southAmerica": "South America",
+    "asia": "Asia",
+    "africa": "Africa",
+    "australia": "Australia & Oceania"
+  }
 }

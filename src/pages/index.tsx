@@ -5,10 +5,10 @@ import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Title, Alignment } from "../components/atoms";
+import { Title, Alignment, CountryFlag } from "../components/atoms";
 import { Card } from "../components/molecules";
-import { SizeEnum } from "../utils/types";
-import { Search } from "../components/organism";
+import { SizeEnum, ContinentEnum } from "../utils/types";
+import { Search, CountriesList } from "../components/organism";
 import { useScreenResize } from "../hooks";
 import { Fade, FadeInAndOut, Motion } from "../containers";
 import { breakpoints } from "../styles/breakpoints";
@@ -65,6 +65,19 @@ const Home: NextPage = () => {
             </FadeInAndOut>
           </Alignment.Horizontal>
         </Container>
+
+        <Discover>
+          <Alignment.Horizontal>
+            <Title as="h2" text={t("searchByCountry")} />
+          </Alignment.Horizontal>
+
+          <CountriesList continent={ContinentEnum.EUROPE} />
+          <CountriesList continent={ContinentEnum.NORTH_AMERICA} />
+          <CountriesList continent={ContinentEnum.SOUTH_AMERICA} />
+          <CountriesList continent={ContinentEnum.ASIA} />
+          <CountriesList continent={ContinentEnum.AFRICA} />
+          <CountriesList continent={ContinentEnum.AUSTRALIA} />
+        </Discover>
       </Motion>
     </Fade>
   );
@@ -83,6 +96,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 const Container = styled.div`
   text-align: center;
   position: relative;
+  min-height: 100vh;
 
   & > h1 {
     font-size: 2rem;
@@ -98,12 +112,21 @@ Container.displayName = "Container";
 const Note = styled.div`
   bottom: 0;
   width: 90vw;
-  margin-top: var(--padding);
+  margin: var(--padding);
 
   @media ${breakpoints.M} {
     width: 50vw;
     position: relative;
+    margin: calc(4 * var(--padding));
   }
 `;
 
 Note.displayName = "Note";
+
+const Discover = styled.div`
+  background-color: var(--background);
+  padding: 5vw;
+  width: 100%;
+`;
+
+Discover.displayName = "Discover";

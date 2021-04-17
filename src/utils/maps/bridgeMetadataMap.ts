@@ -15,9 +15,5 @@ export const bridgeMetadataMap = (
     length: `${metadata.length}m`,
     width: metadata.width ? `${metadata.width}m` : "",
     height: metadata.height ? `${metadata.height}m` : "",
-    // size: [metadata.width, metadata.height]
-    //   .filter(Boolean)
-    //   .map((item) => `${item}m`)
-    //   .join(" x "),
   };
 };
