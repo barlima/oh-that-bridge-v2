@@ -162,18 +162,27 @@ export const getServerSideProps: GetServerSideProps<BridgeInitialProps> = async 
   locale,
   query,
 }) => {
-  const { bridgeId } = query;
-  const response = await fetch(
-    `${process.env.PUBLIC_URL}/api/bridge/${bridgeId}`
-  );
-  const data = await response.json();
+  try {
+    const { bridgeId } = query;
+    const response = await fetch(
+      `${process.env.PUBLIC_URL}/api/bridge/${bridgeId}`
+    );
+    const data = await response.json();
 
-  return {
-    props: {
-      bridge: data.bridge,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+    return {
+      props: {
+        bridge: data.bridge,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+      props: {} as any,
+    };
+  }
 };
 
 const Container = styled.div`

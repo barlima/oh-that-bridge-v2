@@ -7,7 +7,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const data = await response.json();
 
   const fields = data.bridges.map((bridge: Bridge) => ({
-    loc: `https://ohthatbridge.com/bridge/${bridge.id}`,
+    loc: `https://ohthatbridge.com/bridges/${bridge.id}`,
     lastmod: new Date().toISOString(),
   }));
 

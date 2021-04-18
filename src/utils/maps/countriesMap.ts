@@ -440,7 +440,7 @@ export const countriesMap = {
 
     {
       id: "VA",
-      name: "Vatican City",
+      name: "Holy See (Vatican City State)",
       continent: "Europe",
       currencyId: "EUR",
       phoneCode: "3906",

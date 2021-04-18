@@ -82,20 +82,29 @@ export const getServerSideProps: GetServerSideProps<CountryInitialProps> = async
   locale,
   query,
 }) => {
-  const { countryName } = query;
+  try {
+    const { countryName } = query;
 
-  const response = await fetch(
-    `${process.env.PUBLIC_URL}/api/bridges-by-country?country=${countryName}`
-  );
-  const data = await response.json();
+    const response = await fetch(
+      `${process.env.PUBLIC_URL}/api/bridges-by-country?country=${countryName}`
+    );
+    const data = await response.json();
 
-  return {
-    props: {
-      bridges: data.bridges || [],
-      country: countryName as string,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+    return {
+      props: {
+        bridges: data.bridges || [],
+        country: countryName as string,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+      props: {} as any,
+    };
+  }
 };
 
 const Container = styled.div`
