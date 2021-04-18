@@ -10,7 +10,7 @@ export const bridgeMetadataMap = (
     country: metadata.country,
     region: metadata.region,
     city: metadata.city,
-    opened: formatDate(opened.day, opened.month, opened.year),
+    opened: opened ? formatDate(opened.day, opened.month, opened.year) : "",
     constructedBy: metadata.constructedBy,
     length: `${metadata.length}m`,
     width: metadata.width ? `${metadata.width}m` : "",
