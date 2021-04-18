@@ -112,9 +112,8 @@ export const Search: React.FC = () => {
       <SearchWrapper
         ref={searchRef}
         onClick={() => {
-          window.scroll({ top: 0, left: 0 });
-
           if (size === SizeEnum.S) {
+            window.scroll({ top: 0, left: 0 });
             setAttachSearch(true);
           }
         }}
