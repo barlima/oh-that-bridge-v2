@@ -58,16 +58,14 @@ const Country: NextPage<CountryInitialProps> = ({ bridges, country }) => {
             ))}
 
             {bridges.length === 0 && (
-              <Alignment.Horizontal>
-                <NoBridges>
-                  <Title as="h2" text={t("noBridges")} />
-                  <Link href="/">
-                    <a>
-                      <Title as="h2" text={`<- ${t("goBack")}`} />
-                    </a>
-                  </Link>
-                </NoBridges>
-              </Alignment.Horizontal>
+              <NoBridges>
+                <Title as="h2" text={t("noBridges")} />
+                <Link href="/">
+                  <a>
+                    <Title as="h2" text={`<- ${t("goBack")}`} />
+                  </a>
+                </Link>
+              </NoBridges>
             )}
           </Bridges>
         </Container>
@@ -158,13 +156,19 @@ BridgeLink.displayName = "BridgeLink";
 
 const NoBridges = styled.div`
   text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  @media ${breakpoints.M} {
+    margin-top: 20vh;
+  }
 
   & > h2 {
     color: var(--grey);
   }
 
   & h2 {
-    margin: 0;
+    margin: var(--padding);
   }
 `;
 

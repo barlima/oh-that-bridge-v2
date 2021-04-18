@@ -11,6 +11,7 @@ Vertical.displayName = "Vertical";
 const Horizontal = styled.div`
   display: flex;
   justify-content: center;
+  text-align: center;
 `;
 
 Horizontal.displayName = "Horizontal";

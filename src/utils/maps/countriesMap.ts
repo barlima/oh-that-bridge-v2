@@ -349,7 +349,14 @@ export const countriesMap = {
       phoneCode: "40",
       flag: "🇷🇴",
     },
-
+    {
+      id: "RU",
+      name: "Russian Federation",
+      continent: "Europe",
+      currencyId: "RUB",
+      phoneCode: "7",
+      flag: "🇷🇺",
+    },
     {
       id: "SM",
       name: "San Marino",
@@ -786,15 +793,6 @@ export const countriesMap = {
       currencyId: "QAR",
       phoneCode: "974",
       flag: "🇶🇦",
-    },
-
-    {
-      id: "RU",
-      name: "Russian Federation",
-      continent: "Asia",
-      currencyId: "RUB",
-      phoneCode: "7",
-      flag: "🇷🇺",
     },
 
     {
