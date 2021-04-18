@@ -12,7 +12,7 @@ export const bridgeMetadataMap = (
     city: metadata.city,
     opened: opened ? formatDate(opened.day, opened.month, opened.year) : "",
     constructedBy: metadata.constructedBy,
-    length: `${metadata.length}m`,
+    length: metadata.length ? `${metadata.length}m` : "",
     width: metadata.width ? `${metadata.width}m` : "",
     height: metadata.height ? `${metadata.height}m` : "",
   };
