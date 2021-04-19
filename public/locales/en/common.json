@@ -24,5 +24,6 @@
   },
   "bridgesOf": "Bridges of {{ country }}",
   "noBridges": "Sorry, but there are no bridges added to this country yet...",
-  "goBack": "Go back"
+  "goBack": "Go back",
+  "recentlyRegistered": "Recently registered"
 }

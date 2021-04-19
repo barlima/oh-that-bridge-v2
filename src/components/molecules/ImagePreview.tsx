@@ -25,7 +25,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
           width={ADDITIONAL_IMAGE_WIDTH}
           height={ADDITIONAL_IMAGE_WIDTH}
         />
-        {image.caption && (
+        {image.caption && !text && (
           <Caption>
             {image.caption.text}{" "}
             {image.caption.link && (
@@ -36,7 +36,9 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
           </Caption>
         )}
       </ImageWrapper>
-      {text && <Title text={text} />}
+      <Subtitle>
+        {text && <Title text={text} />}
+      </Subtitle>
     </Paper>
   );
 };
@@ -51,3 +53,11 @@ const ImageWrapper = styled.div`
 `;
 
 ImageWrapper.displayName = "ImageWrapper";
+
+const Subtitle = styled.div`
+  margin-top: 0.5rem;
+  max-width: 200px;
+  text-align: center;
+`
+
+Subtitle.displayName = 'Subtitle'
