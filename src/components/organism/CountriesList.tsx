@@ -3,7 +3,6 @@ import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 import countries from "i18n-iso-countries";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 
 import { Title } from "../atoms";
 import { ContinentEnum } from "../../utils/types";
@@ -18,7 +17,6 @@ interface CountriesListProps {
 
 export const CountriesList: React.FC<CountriesListProps> = ({ continent }) => {
   const [hoveredCountry, setHoveredCountry] = useState("");
-  const { ref, inView } = useInView();
   const { t, i18n } = useTranslation();
 
   return (
@@ -35,7 +33,7 @@ export const CountriesList: React.FC<CountriesListProps> = ({ continent }) => {
         )}
       </ContinentAndCountry>
 
-      <CountriesContainer onMouseLeave={() => setHoveredCountry("")} ref={ref}>
+      <CountriesContainer onMouseLeave={() => setHoveredCountry("")}>
         {countriesMap[continent].map((country) => (
           <CountryFlagLink
             key={country.id}

@@ -24,7 +24,7 @@ export const CountryFlagLink: React.FC<
   }, [inView]);
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref key={countryCode}>
       <FlagLink
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

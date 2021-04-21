@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import countries from "i18n-iso-countries";
 import styled from "styled-components";
 
 import { Bridge } from "../../../utils/types";
@@ -25,12 +26,11 @@ interface CountryInitialProps {
 
 const Country: NextPage<CountryInitialProps> = ({ bridges, country }) => {
   const { t } = useTranslation();
-  const countryName = country.replace(/\-/g, " ").toUpperCase();
 
   return (
     <Background>
       <Head>
-        <title>{`${countryName} | Oh, that bridge!`}</title>
+        <title>{`${country} | Oh, that bridge!`}</title>
         <meta name="description" content={country} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -42,7 +42,7 @@ const Country: NextPage<CountryInitialProps> = ({ bridges, country }) => {
         <Container>
           <Alignment.Horizontal>
             <FadeInAndOut>
-              <Title as="h1" text={t("bridgesOf", { country: countryName })} />
+              <Title as="h1" text={t("bridgesOf", { country })} />
             </FadeInAndOut>
           </Alignment.Horizontal>
 
@@ -82,6 +82,11 @@ export const getServerSideProps: GetServerSideProps<CountryInitialProps> = async
 }) => {
   try {
     const { countryName } = query;
+    const country = (countryName as string).replace(/\-/g, " ");
+    const countryCode = countries.getAlpha2Code(country, locale);
+    const name =
+      countries.getName(countryCode, locale, { select: "official" }) ||
+      country.toUpperCase();
 
     const response = await fetch(
       `${process.env.PUBLIC_URL}/api/bridges-by-country?country=${countryName}`
@@ -91,7 +96,7 @@ export const getServerSideProps: GetServerSideProps<CountryInitialProps> = async
     return {
       props: {
         bridges: data.bridges || [],
-        country: countryName as string,
+        country: name,
         ...(await serverSideTranslations(locale, ["common"])),
       },
     };
