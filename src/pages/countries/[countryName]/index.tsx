@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps<CountryInitialProps> = async
       country.toUpperCase();
 
     const response = await fetch(
-      `${process.env.PUBLIC_URL}/api/bridges-by-country?country=${countryName}`
+      `${process.env.PUBLIC_URL}/api/bridges-by-country?country=${countryCode}`
     );
     const data = await response.json();
 

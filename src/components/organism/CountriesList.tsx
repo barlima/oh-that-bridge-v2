@@ -40,7 +40,7 @@ export const CountriesList: React.FC<CountriesListProps> = ({ continent }) => {
             countryCode={country.id}
             size={FLAG_SIZE}
             href={`/countries/${countries
-              .getName(country.id, 'en', {
+              .getName(country.id, "en", {
                 select: "official",
               })
               .toLowerCase()
