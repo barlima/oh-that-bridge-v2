@@ -1,20 +1,24 @@
-import { NextPage, GetStaticProps } from "next";
+import { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import styled from "styled-components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Title, Alignment, CountryFlag } from "../components/atoms";
-import { Card } from "../components/molecules";
-import { SizeEnum, ContinentEnum } from "../utils/types";
+import { Title, Alignment } from "../components/atoms";
+import { Card, BridgesList } from "../components/molecules";
+import { SizeEnum, ContinentEnum, Bridge } from "../utils/types";
 import { Search, CountriesList } from "../components/organism";
 import { useScreenResize } from "../hooks";
 import { Fade, FadeInAndOut, Motion } from "../containers";
 import { breakpoints } from "../styles/breakpoints";
 import { slideBottom } from "../utils/animations";
 
-const Home: NextPage = () => {
+interface HomeInitialProps {
+  recentBridges: Bridge[];
+}
+
+const Home: NextPage<HomeInitialProps> = ({ recentBridges }) => {
   const { t } = useTranslation();
   const { size } = useScreenResize();
   const imageLevel = [SizeEnum.L, SizeEnum.XL].includes(size)
@@ -67,6 +71,18 @@ const Home: NextPage = () => {
         </Container>
 
         <Discover>
+          {recentBridges.length > 0 && (
+            <>
+              <Alignment.Horizontal>
+                <Title as="h2" text={t("recentlyRegistered")} />
+              </Alignment.Horizontal>
+
+              <RecentlyRegistered>
+                <BridgesList bridges={recentBridges} />
+              </RecentlyRegistered>
+            </>
+          )}
+
           <Alignment.Horizontal>
             <Title as="h2" text={t("searchByCountry")} />
           </Alignment.Horizontal>
@@ -85,9 +101,15 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps<HomeInitialProps> = async ({
+  locale,
+}) => {
+  const response = await fetch(`${process.env.PUBLIC_URL}/api/recent-bridges`);
+  const data = await response.json();
+
   return {
     props: {
+      recentBridges: data.bridges as Bridge[],
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
@@ -130,3 +152,12 @@ const Discover = styled.div`
 `;
 
 Discover.displayName = "Discover";
+
+const RecentlyRegistered = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10vh;
+`;
+
+RecentlyRegistered.displayName = "RecentlyRegistered";

@@ -11,13 +11,12 @@ import {
   Background,
   Title,
   Alignment,
-  Rotate,
   BackArrow,
   Logo,
 } from "../../../components/atoms";
 import { breakpoints } from "../../../styles/breakpoints";
 import { FadeInAndOut, Fade } from "../../../containers";
-import { ImagePreview } from "../../../components/molecules";
+import { BridgesList } from "../../../components/molecules";
 
 interface CountryInitialProps {
   bridges: Bridge[];
@@ -47,15 +46,7 @@ const Country: NextPage<CountryInitialProps> = ({ bridges, country }) => {
           </Alignment.Horizontal>
 
           <Bridges>
-            {bridges.map((bridge) => (
-              <Link href={`/bridges/${bridge.id}`} passHref>
-                <BridgeLink>
-                  <Rotate random>
-                    <ImagePreview image={bridge.image} text={bridge.name} />
-                  </Rotate>
-                </BridgeLink>
-              </Link>
-            ))}
+            <BridgesList bridges={bridges} />
 
             {bridges.length === 0 && (
               <NoBridges>
@@ -141,23 +132,6 @@ const Bridges = styled.div`
 `;
 
 Bridges.displayName = "Bridges";
-
-const BridgeLink = styled.a`
-  margin: var(--padding);
-  transition: transform 0.5s;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    z-index: 10;
-
-    & > div {
-      transform: rotate(0);
-    }
-  }
-`;
-
-BridgeLink.displayName = "BridgeLink";
 
 const NoBridges = styled.div`
   text-align: center;

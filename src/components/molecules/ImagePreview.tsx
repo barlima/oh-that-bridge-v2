@@ -36,16 +36,13 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
           </Caption>
         )}
       </ImageWrapper>
-      <Subtitle>
-        {text && <Title text={text} />}
-      </Subtitle>
+      <Subtitle>{text && <Title text={text} />}</Subtitle>
     </Paper>
   );
 };
 
 const ImageWrapper = styled.div`
   position: relative;
-  width: calc(80vw - 2 * var(--padding));
 
   @media ${breakpoints.M} {
     width: 200px;
@@ -56,8 +53,12 @@ ImageWrapper.displayName = "ImageWrapper";
 
 const Subtitle = styled.div`
   margin-top: 0.5rem;
-  max-width: 200px;
+  max-width: 100%;
   text-align: center;
-`
 
-Subtitle.displayName = 'Subtitle'
+  @media ${breakpoints.M} {
+    width: 200px;
+  }
+`;
+
+Subtitle.displayName = "Subtitle";
