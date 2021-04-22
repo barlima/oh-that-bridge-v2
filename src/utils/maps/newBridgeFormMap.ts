@@ -23,6 +23,7 @@ export const newBridgeFormMap = (values: any): Bridge => {
   return {
     id: values.id,
     name: values.bridgeName,
+    addedOn: new Date(),
     metadata: {
       country: values.country,
       region: values.region,
@@ -32,6 +33,10 @@ export const newBridgeFormMap = (values: any): Bridge => {
       length: values.length,
       constructedBy: values.constructedBy,
       opened: getOpenedDate(values.opened),
+      location: {
+        lat: values.lat,
+        long: values.long,
+      },
     },
     image: {
       src: values.src,

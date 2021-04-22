@@ -100,6 +100,12 @@ const Add: NextPage = () => {
               />
               <Field name="region" placeholder="Region" component={FormInput} />
               <Field name="city" placeholder="City" component={FormInput} />
+              <Field name="lat" placeholder="Latitude" component={FormInput} />
+              <Field
+                name="long"
+                placeholder="Longitude"
+                component={FormInput}
+              />
               <Field
                 name="constructedBy"
                 placeholder="Constructed by"
@@ -151,7 +157,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 const Form = styled.form`
   width: 40vw;
 
-  & > *, & .images > * {
+  & > *,
+  & .images > * {
     margin-bottom: var(--padding);
     width: 100%;
   }
