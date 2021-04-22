@@ -9,6 +9,7 @@ import {
   faCalendarDay,
   faCity,
   faSort,
+  faMapMarkedAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const metadataIconsMap: Record<keyof BridgeMetadata, IconDefinition> = {
@@ -21,4 +22,5 @@ export const metadataIconsMap: Record<keyof BridgeMetadata, IconDefinition> = {
   size: faRulerCombined,
   length: faArrowsAltH,
   opened: faCalendarDay,
+  location: faMapMarkedAlt,
 };
