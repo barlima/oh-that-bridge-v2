@@ -8,4 +8,5 @@ export interface Bridge {
   description?: string;
   metadata: BridgeMetadata;
   additionalImages: Image[];
+  addedOn: Date;
 }

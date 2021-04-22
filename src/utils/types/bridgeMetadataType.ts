@@ -12,4 +12,8 @@ export type BridgeMetadata = {
     month: number;
     year: number;
   };
+  location: {
+    lat: number;
+    long: number;
+  };
 };
