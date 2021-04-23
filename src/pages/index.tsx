@@ -9,10 +9,10 @@ import { Title, Alignment } from "../components/atoms";
 import { Card, BridgesList } from "../components/molecules";
 import { SizeEnum, ContinentEnum, Bridge } from "../utils/types";
 import { Search, CountriesList } from "../components/organism";
-import { useScreenResize } from "../hooks";
+import { useScreenResize, useAnimateInView } from "../hooks";
 import { Fade, FadeInAndOut, Motion } from "../containers";
 import { breakpoints } from "../styles/breakpoints";
-import { slideBottom } from "../utils/animations";
+import { slideBottom, mediumStagger } from "../utils/animations";
 
 interface HomeInitialProps {
   recentBridges: Bridge[];
@@ -21,6 +21,7 @@ interface HomeInitialProps {
 const Home: NextPage<HomeInitialProps> = ({ recentBridges }) => {
   const { t } = useTranslation();
   const { size } = useScreenResize();
+  const { ref, controls } = useAnimateInView();
   const imageLevel = [SizeEnum.L, SizeEnum.XL].includes(size)
     ? SizeEnum.L
     : SizeEnum.XL;
@@ -77,7 +78,11 @@ const Home: NextPage<HomeInitialProps> = ({ recentBridges }) => {
                 <Title as="h2" text={t("recentlyRegistered")} />
               </Alignment.Horizontal>
 
-              <RecentlyRegistered>
+              <RecentlyRegistered
+                ref={ref}
+                animate={controls}
+                variants={mediumStagger}
+              >
                 <BridgesList bridges={recentBridges} />
               </RecentlyRegistered>
             </>
@@ -153,7 +158,7 @@ const Discover = styled.div`
 
 Discover.displayName = "Discover";
 
-const RecentlyRegistered = styled.div`
+const RecentlyRegistered = styled(motion.div)`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
