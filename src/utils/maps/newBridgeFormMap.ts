@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import countries from "i18n-iso-countries";
 import { Bridge } from "../types";
 
 const getOpenedDate = (
@@ -23,9 +24,10 @@ export const newBridgeFormMap = (values: any): Bridge => {
   return {
     id: values.id,
     name: values.bridgeName,
-    addedOn: new Date(),
+    addedOn: dayjs().unix(),
     metadata: {
       country: values.country,
+      countryCode: countries.getAlpha2Code(values.country, "en"),
       region: values.region,
       city: values.city,
       width: values.width,
@@ -48,7 +50,7 @@ export const newBridgeFormMap = (values: any): Bridge => {
       },
     },
     additionalImages: additionalImagesRange.reduce((acc, _, i) => {
-      if (!values[`src${i}`]) {
+      if (!values[`src${i + 1}`]) {
         return acc;
       }
 

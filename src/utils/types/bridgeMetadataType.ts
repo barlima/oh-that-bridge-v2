@@ -1,6 +1,7 @@
 export type BridgeMetadata = {
   constructedBy?: string;
   country: string;
+  countryCode: string;
   region?: string;
   city?: string;
   height?: number;

@@ -1,5 +1,6 @@
 import { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import styled from "styled-components";
@@ -69,6 +70,15 @@ const Home: NextPage<HomeInitialProps> = ({ recentBridges }) => {
               </Note>
             </FadeInAndOut>
           </Alignment.Horizontal>
+
+          <Navigation>
+            <Link href="/about" passHref>
+              <NavLink>About</NavLink>
+            </Link>
+            <Link href="/contribute" passHref>
+              <NavLink>Contribute</NavLink>
+            </Link>
+          </Navigation>
         </Container>
 
         <Discover>
@@ -166,3 +176,37 @@ const RecentlyRegistered = styled(motion.div)`
 `;
 
 RecentlyRegistered.displayName = "RecentlyRegistered";
+
+const Navigation = styled.div`
+  position: absolute;
+  bottom: var(--padding);
+  margin: var(--padding) 0;
+  width: 100%;
+`;
+
+Navigation.displayName = "Navigation";
+
+const NavLink = styled.a`
+  border-right: 1px solid var(--grey);
+  color: var(--grey);
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 5vh;
+  padding: 0 var(--padding);
+  transition: color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--black);
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  @media ${breakpoints.M} {
+    font-size: 1.3rem;
+  }
+`;
+
+NavLink.displayName = "NavLink";

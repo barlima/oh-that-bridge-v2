@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const date = dayjs().subtract(14, "days").toDate();
+  const date = dayjs().subtract(14, "days").unix();
 
   const bridgesRef = fire.firestore().collection("bridges");
   const documnet = await bridgesRef
@@ -16,6 +16,6 @@ export default async function handler(
     .get();
 
   res.status(200).json({
-    bridges: documnet.docs.map((results) => results.data())
+    bridges: documnet.docs.map((results) => results.data()),
   });
 }

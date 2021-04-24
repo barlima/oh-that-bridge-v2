@@ -100,9 +100,15 @@ const Add: NextPage = () => {
               />
               <Field name="region" placeholder="Region" component={FormInput} />
               <Field name="city" placeholder="City" component={FormInput} />
-              <Field name="lat" placeholder="Latitude" component={FormInput} />
+              <Field
+                name="lat"
+                type="number"
+                placeholder="Latitude"
+                component={FormInput}
+              />
               <Field
                 name="long"
+                type="number"
                 placeholder="Longitude"
                 component={FormInput}
               />
@@ -138,14 +144,14 @@ const Add: NextPage = () => {
 export default Add;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // if (process.env.NODE_ENV !== "development") {
-  //   return {
-  //     props: {},
-  //     redirect: {
-  //       destination: "/",
-  //     },
-  //   };
-  // }
+  if (process.env.NODE_ENV !== "development") {
+    return {
+      props: {},
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
 
   return {
     props: {

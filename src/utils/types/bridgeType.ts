@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import { Image } from "./imageType";
 import { BridgeMetadata } from "./bridgeMetadataType";
 
@@ -8,5 +9,5 @@ export interface Bridge {
   description?: string;
   metadata: BridgeMetadata;
   additionalImages: Image[];
-  addedOn: Date;
+  addedOn: number;
 }
