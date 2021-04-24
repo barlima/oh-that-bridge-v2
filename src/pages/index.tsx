@@ -135,8 +135,10 @@ const Container = styled.div`
   position: relative;
   min-height: 100vh;
 
-  & > h1 {
+  & h1 {
     font-size: 2rem;
+    margin: 0;
+    padding: var(--padding) 0;
 
     @media ${breakpoints.M} {
       font-size: 3rem;
@@ -147,9 +149,9 @@ const Container = styled.div`
 Container.displayName = "Container";
 
 const Note = styled.div`
-  bottom: 0;
   width: 90vw;
-  margin: var(--padding);
+  margin-top: var(--padding);
+  margin-bottom: 7vh;
 
   @media ${breakpoints.M} {
     width: 50vw;
@@ -179,7 +181,7 @@ RecentlyRegistered.displayName = "RecentlyRegistered";
 
 const Navigation = styled.div`
   position: absolute;
-  bottom: var(--padding);
+  bottom: 0;
   margin: var(--padding) 0;
   width: 100%;
 `;
