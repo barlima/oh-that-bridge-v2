@@ -36,10 +36,10 @@
       "e": "Once you have all the data, feel free to mail us at:"
     },
     "data": {
-      "a": "Bridge name,",
-      "b": "Opening date,",
-      "c": "Bridge location (country, region, city, coordinates),",
-      "d": "Images (or URLs of the images),",
+      "a": "Bridge name",
+      "b": "Opening date",
+      "c": "Bridge location (country, region, city, coordinates)",
+      "d": "Images (or URLs of the images)",
       "e": "Your data (links, nickname, etc.), so we can also display it :)",
       "f": "Any other data you think would be useful"
     }
