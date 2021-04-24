@@ -15,6 +15,7 @@ import {
 export const metadataIconsMap: Record<keyof BridgeMetadata, IconDefinition> = {
   constructedBy: faPencilRuler,
   country: faGlobeEurope,
+  countryCode: faGlobeEurope,
   region: faMapSigns,
   city: faCity,
   height: faSort,
