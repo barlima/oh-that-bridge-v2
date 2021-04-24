@@ -50,7 +50,7 @@ export const newBridgeFormMap = (values: any): Bridge => {
       },
     },
     additionalImages: additionalImagesRange.reduce((acc, _, i) => {
-      if (!values[`src${i + 1}`]) {
+      if (!values[`src${i}`]) {
         return acc;
       }
 

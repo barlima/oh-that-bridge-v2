@@ -16,7 +16,7 @@ export const BridgesList: React.FC<BridgesListProps> = ({ bridges }) => {
   return (
     <>
       {bridges.map((bridge) => (
-        <BridgeLink variants={fadeInAndOutSlowly}>
+        <BridgeLink variants={fadeInAndOutSlowly} key={bridge.id}>
           <Link href={`/bridges/${bridge.id}`} passHref key={bridge.id}>
             <a>
               <Rotate random>

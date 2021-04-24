@@ -130,7 +130,7 @@ const Add: NextPage = () => {
 
               <Title as="h4" text="Additional images" />
 
-              {new Array(3).fill(0).map((_, i) => getImageFields(i + 1))}
+              {new Array(3).fill(0).map((_, i) => getImageFields(i))}
 
               <button type="submit">Submit</button>
             </Form>
@@ -144,14 +144,14 @@ const Add: NextPage = () => {
 export default Add;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // if (process.env.NODE_ENV !== "development") {
-  //   return {
-  //     props: {},
-  //     redirect: {
-  //       destination: "/",
-  //     },
-  //   };
-  // }
+  if (process.env.NODE_ENV !== "development") {
+    return {
+      props: {},
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
 
   return {
     props: {
