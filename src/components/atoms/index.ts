@@ -2,6 +2,7 @@ export { Alignment } from "./Alignment";
 export { BackArrow } from "./BackArrow";
 export { Background } from "./Background";
 export { Caption } from "./Caption";
+export { Container } from "./Container";
 export { CountryFlag } from "./CountryFlag";
 export type { CountryFlagProps } from "./CountryFlag";
 export { ListItem } from "./ListItem";

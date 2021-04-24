@@ -25,5 +25,23 @@
   "bridgesOf": "Bridges of {{ country }}",
   "noBridges": "Sorry, but there are no bridges added to this country yet...",
   "goBack": "Go back",
-  "recentlyRegistered": "Recently registered"
+  "recentlyRegistered": "Recently registered",
+  "contribute": {
+    "title": "Contribute",
+    "content": {
+      "a": "Help is always welcome!",
+      "b": "If you would like to contribute and be a part of the \"Oh, that bridge!\" family, feel free to send us a simple email.",
+      "c": "If the bridge is not yet in our database, please provide:",
+      "d": "Please make sure you are the owner of the pictures or the license allows for a free usage.",
+      "e": "Once you have all the data, feel free to mail us at:"
+    },
+    "data": {
+      "a": "Bridge name,",
+      "b": "Opening date,",
+      "c": "Bridge location (country, region, city, coordinates),",
+      "d": "Images (or URLs of the images),",
+      "e": "Your data (links, nickname, etc.), so we can also display it :)",
+      "f": "Any other data you think would be useful"
+    }
+  }
 }
