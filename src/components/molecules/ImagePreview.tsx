@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Paper, Caption, Title } from "../atoms";
 import { SizeEnum, Image as ImageType } from "../../utils/types";
-import { ADDITIONAL_IMAGE_WIDTH } from "../../utils/consts";
+import { ADDITIONAL_IMAGE_WIDTH, FALLBACK_IMAGE } from "../../utils/consts";
 import { breakpoints } from "../../styles/breakpoints";
 
 interface ImagePreviewProps {
@@ -17,7 +17,7 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
     <Paper size={SizeEnum.S}>
       <ImageWrapper>
         <Image
-          src={image.src}
+          src={image.src || FALLBACK_IMAGE}
           alt={image.alt}
           layout="intrinsic"
           objectFit="cover"

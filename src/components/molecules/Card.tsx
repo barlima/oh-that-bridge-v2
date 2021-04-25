@@ -4,7 +4,11 @@ import styled from "styled-components";
 
 import { Paper, Caption, Title } from "../atoms";
 import { SizeEnum, Image as ImageType } from "../../utils/types";
-import { IMAGE_RATIO, DEFAULT_IMAGE_WIDTH } from "../../utils/consts";
+import {
+  IMAGE_RATIO,
+  DEFAULT_IMAGE_WIDTH,
+  FALLBACK_IMAGE,
+} from "../../utils/consts";
 import { breakpoints } from "../../styles/breakpoints";
 
 interface CardProps {
@@ -26,7 +30,7 @@ export const Card: React.FC<CardProps> = ({
     <Paper size={level}>
       <ImageWrapper>
         <Image
-          src={image.src}
+          src={image.src || FALLBACK_IMAGE}
           alt={image.alt}
           layout="intrinsic"
           objectFit="cover"
