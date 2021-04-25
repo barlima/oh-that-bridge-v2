@@ -73,10 +73,10 @@ const Home: NextPage<HomeInitialProps> = ({ recentBridges }) => {
 
           <Navigation>
             <Link href="/about" passHref>
-              <NavLink>About</NavLink>
+              <NavLink>{t('about.title')}</NavLink>
             </Link>
             <Link href="/contribute" passHref>
-              <NavLink>Contribute</NavLink>
+              <NavLink>{t('contribute.title')}</NavLink>
             </Link>
           </Navigation>
         </Container>
