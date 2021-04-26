@@ -15,22 +15,22 @@ const FormInput = ({ field, form, ...props }) => (
 const getImageFields = (index?: number): JSX.Element => (
   <div key={`image_fields_${index}`} className="images">
     <Field
-      name={`src${index || ""}`}
+      name={`src${index ?? ""}`}
       placeholder="Source"
       component={FormInput}
     />
     <Field
-      name={`text${index || ""}`}
+      name={`text${index ?? ""}`}
       placeholder="Caption"
       component={FormInput}
     />
     <Field
-      name={`link${index || ""}`}
+      name={`link${index ?? ""}`}
       placeholder="Author"
       component={FormInput}
     />
     <Field
-      name={`href${index || ""}`}
+      name={`href${index ?? ""}`}
       placeholder="Author URL"
       component={FormInput}
     />
