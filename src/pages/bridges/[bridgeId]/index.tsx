@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
 import { Bridge as BridgeType, SizeEnum, Image } from "../../../utils/types";
@@ -26,6 +26,7 @@ import {
   slideLeftBottom,
   stagger,
   slideBottom,
+  fadeInAndOut,
 } from "../../../utils/animations";
 
 interface BridgeInitialProps {
@@ -51,17 +52,24 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
     </span>
   );
 
-  const updateMainImage = (image: Image): void => {
-    const newAdditionalImagesOrder =
-      image === bridge.image
-        ? bridge.additionalImages
-        : bridge.additionalImages.reduce((acc, img) => {
-            return img === image ? [...acc, bridge.image] : [...acc, img];
-          }, []);
+  const updateMainImage = useCallback(
+    (image: Image): void => {
+      if (size === SizeEnum.S) {
+        return;
+      }
 
-    setMainImage(image);
-    setAdditionalImages(newAdditionalImagesOrder);
-  };
+      const newAdditionalImagesOrder =
+        image === bridge.image
+          ? bridge.additionalImages
+          : bridge.additionalImages.reduce((acc, img) => {
+              return img === image ? [...acc, bridge.image] : [...acc, img];
+            }, []);
+
+      setMainImage(image);
+      setAdditionalImages(newAdditionalImagesOrder);
+    },
+    [bridge, size]
+  );
 
   const onScreenResize = (): void => {
     if (typeof window !== "undefined") {
@@ -102,15 +110,21 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
 
         <Alignment.Center>
           <Container>
-            <ImageOverflow variants={slideLeftBottom} key={mainImage.src}>
-              <Rotate deg={size === SizeEnum.S ? 0 : -2}>
-                <Card
-                  image={mainImage}
-                  width={imageWidth}
-                  text={getCaption(mainImage)}
-                />
-              </Rotate>
-            </ImageOverflow>
+            <AnimatePresence>
+              <ImageOverflow
+                variants={slideLeftBottom}
+                exit={{ ...slideLeftBottom.exit }}
+                key={mainImage.src}
+              >
+                <Rotate deg={size === SizeEnum.S ? 0 : -2}>
+                  <Card
+                    image={mainImage}
+                    width={imageWidth}
+                    text={getCaption(mainImage)}
+                  />
+                </Rotate>
+              </ImageOverflow>
+            </AnimatePresence>
 
             <MainSection>
               <FadeInAndOut>
@@ -134,10 +148,7 @@ const Bridge: NextPage<BridgeInitialProps> = ({ bridge }) => {
 
               <OtherImages>
                 {additionalImages.map((img) => (
-                  <OtherImage
-                    key={img.src}
-                    onClick={() => size !== SizeEnum.S && updateMainImage(img)}
-                  >
+                  <OtherImage onClick={() => updateMainImage(img)}>
                     <Rotate random>
                       <ImagePreview image={img} />
                     </Rotate>

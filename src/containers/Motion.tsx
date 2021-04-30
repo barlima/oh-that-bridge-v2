@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export const Motion: React.FC = ({ children }) => {
   return (
-    <motion.div initial="initial" animate="animate">
+    <motion.div initial="initial" animate="animate" exit="exit">
       {children}
     </motion.div>
   );

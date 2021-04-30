@@ -36,7 +36,11 @@ export const ImagePreview: React.FC<ImagePreviewProps> = ({ image, text }) => {
           </Caption>
         )}
       </ImageWrapper>
-      <Subtitle>{text && <Title text={text} />}</Subtitle>
+      {text && (
+        <Subtitle>
+          <Title text={text} />
+        </Subtitle>
+      )}
     </Paper>
   );
 };

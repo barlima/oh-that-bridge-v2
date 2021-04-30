@@ -14,7 +14,13 @@ export const slideLeftBottom: Variants = {
     opacity: 1,
     transition: {
       ease: easing,
-      duration: 0.6,
+      duration: 0.5,
     },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      delay: 0.2
+    }
   },
 };
