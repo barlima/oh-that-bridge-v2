@@ -61,6 +61,14 @@ export const Search: React.FC = () => {
       const code = event.keyCode;
 
       switch (code) {
+        case 9:
+          event.preventDefault();
+          setActiveOption((current) =>
+            isNumber(current) && current < searchResults.length - 1
+              ? current + 1
+              : 0
+          );
+          break;
         case 38:
           event.preventDefault();
           setActiveOption((current) =>
@@ -117,7 +125,9 @@ export const Search: React.FC = () => {
             setAttachSearch(true);
           }
         }}
-        onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
+        onBlur={() =>
+          size === SizeEnum.S ? setAttachSearch(false) : hideDropDown()
+        }
         attach={attachSearch}
         offset={searchOffset}
       >
