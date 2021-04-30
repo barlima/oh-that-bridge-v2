@@ -50,7 +50,7 @@ const About: NextPage = () => {
             <Title as="span" text="Oh, that bridge!" />, but the reason to build
             it hasn't changed - to learn new things, to improve code, to write
             better and cleaner. The first version has been released in March
-            2018. It focused on pictures presentation and bridges locations (it
+            2018. It focused on picture presentation and bridge locations (it
             has a Google map with markers implemented). I've created it because
             I wanted to better understand how React hooks work and how can you
             use them in GraphQL queries. It was also my first application with a
@@ -63,7 +63,7 @@ const About: NextPage = () => {
             - Animations and overall reception,
             <br />
             - User experience (I wanted to make it scroll-less, but after a
-            while I resigned),
+            while, I resigned),
             <br />
             - Simple and fast search mechanism
             <br />
@@ -79,12 +79,12 @@ const About: NextPage = () => {
             <Title as="span" text=":)" />
             <br />
             <br />
-            I have already mentioned some technologies, so mabye let's take a
+            I have already mentioned some technologies, so maybe let's take a
             deeper look into the tech-stack:
             <br />
             - <Title as="span" text="React" /> with{" "}
             <Title as="span" text="TypeScript" /> - I've been using TypeScript
-            for a year now and I don't beleve I would ever go back. The project
+            for a year now and I don't believe I would ever go back. The project
             is not complex, so I did not have to define many types, but anyway,
             it makes me feel comfortable.
             <br />
@@ -110,11 +110,11 @@ const About: NextPage = () => {
             - <Title as="span" text="Framer Motion" /> with{" "}
             <Title as="span" text="React Intersection Observer" /> - at the
             beginning of 2021 I've seen my first video with Framer Motion. It
-            seemed so simple and so powerfull and I had to try it. I am not
+            seemed so simple and so powerful and I had to try it. I am not
             really sure yet what's the best way to build components using it,
-            but maybe after a few weeks or months I'll squeeze it somewhere in a
+            but maybe after a few weeks or months, I'll squeeze it somewhere in a
             project structure. React Intersection Observer works with Framer
-            Motion out of the box! So you can acheive estonishing (or simply -
+            Motion out of the box! So you can achieve astonishing (or simply -
             nice) results with just a few lines of code. This is actually
             something I'm going to certainly remember from this project.
             <br />
@@ -125,7 +125,7 @@ const About: NextPage = () => {
             a better pair.
             <br />
             <br />
-            The entire code base, is available here:{" "}
+            The entire code base is available here:{" "}
             <a href="https://github.com/barlima/oh-that-bridge-v2">
               <Title as="span" text="barlima/oh-that-bridge-v2" />{" "}
             </a>
