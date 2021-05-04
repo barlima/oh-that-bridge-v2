@@ -125,9 +125,7 @@ export const Search: React.FC = () => {
             setAttachSearch(true);
           }
         }}
-        onBlur={() =>
-          size === SizeEnum.S ? setAttachSearch(false) : hideDropDown()
-        }
+        onBlur={() => size === SizeEnum.S && setAttachSearch(false)}
         attach={attachSearch}
         offset={searchOffset}
       >

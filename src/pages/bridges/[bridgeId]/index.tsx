@@ -256,6 +256,7 @@ const MainSection = styled(motion.div)`
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+  height: max-content;
   margin: 2rem;
 
   & h1 {
